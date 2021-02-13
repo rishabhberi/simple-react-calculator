@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.calculator-grid {
+  display: grid;
+  gap: 3px;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.display-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #eee;
+  grid-column: 1 / 5;
+  height: 3em;
+  box-shadow: 0 0 5px inset;
+  padding: 0 0.5em;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  width: 3em;
+  box-shadow: 0 0 7px inset;
+  background-color: #ccc;
+}
