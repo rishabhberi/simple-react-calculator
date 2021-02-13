@@ -8,6 +8,9 @@ const initialState = {
   operand2: null
 }
 
+const DARK_THEME = "dark-theme";
+const LIGHT_THEME = "light-theme";
+
 class Calculator extends Component {
 
   constructor(props) {
@@ -15,7 +18,8 @@ class Calculator extends Component {
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.state = {
       ...initialState,
-      scientificMode: false
+      scientificMode: false,
+      theme: "Light Theme"
     };
   }
 
@@ -109,10 +113,34 @@ class Calculator extends Component {
 
   }
 
+  handleThemeChange = (e) => {
+    
+    const value = e.target.textContent;
+    this.setState({
+      theme: value
+    });
+  }
+
   render () {
+
+    var gridClass = "calculator-grid ";
+    var displayValue = isNaN(this.state.operand1)?"Error":this.state.operand1;
+
+    if(this.state.theme === "Light Theme") {
+      document.body.classList.add(LIGHT_THEME);
+      document.body.classList.remove(DARK_THEME);
+      gridClass += LIGHT_THEME;
+    } else {
+      document.body.classList.add(DARK_THEME);
+      document.body.classList.remove(LIGHT_THEME);
+      gridClass += DARK_THEME;
+    }
+
     return (
-      <div className="calculator-grid">
-        <Display value={isNaN(this.state.operand1)?"Error":this.state.operand1} />
+      <div className={gridClass}>
+        <Button value="Light Theme" type="theme" handleButtonClick={this.handleThemeChange} />
+        <Button value="Dark Theme" type="theme" handleButtonClick={this.handleThemeChange} />
+        <Display value={displayValue} />
         <Button value="1" type="number" handleButtonClick={this.handleButtonClick} />
         <Button value="2" type="number" handleButtonClick={this.handleButtonClick} />
         <Button value="3" type="number" handleButtonClick={this.handleButtonClick} />
