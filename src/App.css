@@ -1,12 +1,13 @@
 .App {
   text-align: center;
+  user-select: none;
 }
 
 .calculator-grid {
   display: grid;
   gap: 3px;
   justify-content: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -15,7 +16,7 @@
   justify-content: flex-end;
   align-items: center;
   background-color: #eee;
-  grid-column: 1 / 5;
+  grid-column: span 4;
   height: 3em;
   box-shadow: 0 0 5px inset;
   padding: 0 0.5em;
@@ -29,4 +30,14 @@
   width: 3em;
   box-shadow: 0 0 7px inset;
   background-color: #ccc;
+}
+
+.button[type=scientific] {
+  width: auto;
+  grid-column: span 3;
+}
+
+.button[type=function] {
+  width: auto;
+  grid-column: span 2;
 }

@@ -13,7 +13,10 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.state = {...initialState};
+    this.state = {
+      ...initialState,
+      scientificMode: false
+    };
   }
 
   handleButtonClick = (e) => {
@@ -78,6 +81,34 @@ class Calculator extends Component {
     }
   }
 
+  toggleScientificMode = () => {
+    this.setState({
+      scientificMode: !this.state.scientificMode
+    })
+  }
+
+  handleScientificFunction = (e) => {
+
+    const value = e.target.textContent;
+    const operand1 = this.state.operand1;
+    let result;
+
+    switch(value) {
+      case "+/-": result = -operand1;
+        break;
+      case "Square": result = Math.pow(operand1,2);
+        break;
+      case "Root": result = Math.sqrt(operand1);
+        break;
+    }
+
+    this.setState({
+      ...initialState,
+      operand1: result
+    });
+
+  }
+
   render () {
     return (
       <div className="calculator-grid">
@@ -98,6 +129,16 @@ class Calculator extends Component {
         <Button value="0" type="number" handleButtonClick={this.handleButtonClick} />
         <Button value="=" type="equal" handleButtonClick={this.handleButtonClick} />
         <Button value="/" type="operator" handleButtonClick={this.handleButtonClick} />
+        <Button value="Scientific Mode" type="scientific" handleButtonClick={this.toggleScientificMode} />
+        {
+          this.state.scientificMode ? 
+            <React.Fragment>
+              <Button value="+/-" handleButtonClick={this.handleScientificFunction} />
+              <Button value="Square" type="function" handleButtonClick={this.handleScientificFunction} />
+              <Button value="Root" type="function" handleButtonClick={this.handleScientificFunction} />
+            </React.Fragment>
+            : null
+        }
       </div>
     )
   }
